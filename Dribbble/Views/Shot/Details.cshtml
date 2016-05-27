@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Show";
+}
+
+@model Dribbble.Models.Shot
+
+<h2>@Model.Title</h2>
+<h3>@Model.GetAccount().Name</h3>
+
+<img src="@Model.ImageURL" alt="@Model.Title"/>
+
+<p>@Model.Description</p>

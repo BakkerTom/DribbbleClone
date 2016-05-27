@@ -1,0 +1,35 @@
+﻿@model Dribbble.Models.Account
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Login failed");
+    <div class="form-group">
+        <fieldset>
+
+            <div class="editor-label">
+                <label>User Name</label>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.AccountName)
+                @Html.ValidationMessageFor(u => u.AccountName)
+            </div>
+            <div class="editor-label">
+                <label>Password</label>
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(u => u.Password)
+                @Html.ValidationMessageFor(u => u.Password)
+            </div>
+            <div class="editor-label">
+                @Html.CheckBoxFor(u => u.RememberMe)
+                <span>Remember Me</span>
+            </div>
+        </fieldset>
+
+        <input type="submit" value="Log In" class="btn btn-primary" />
+    </div>
+}

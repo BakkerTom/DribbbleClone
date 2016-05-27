@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Shots";
+}
+
+@model IEnumerable<Dribbble.Models.Shot>
+
+<h2>Shots</h2>
+
+<div class="row">
+   @foreach (var item in Model)
+   {
+    <div class="col-sm-4 col-md-3">
+        <div class="thumbnail">
+            <img src="@item.ImageURL" alt="@item.Title">
+            <div class="caption">
+                <span>@item.Title</span>
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+            </div>
+        </div>
+    </div>
+   }  
+</div>
+       
+
+
