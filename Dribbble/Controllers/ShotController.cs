@@ -30,5 +30,11 @@ namespace Dribbble.Controllers
             }
             return View(s);
         }
+
+        [HttpGet]
+        public ActionResult New()
+        {
+            return View();
+        }
     }
 }

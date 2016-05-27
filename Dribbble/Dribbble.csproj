@@ -225,6 +225,7 @@
     <Content Include="Views\Shot\Index.cshtml" />
     <Content Include="Views\Shot\Details.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shot\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

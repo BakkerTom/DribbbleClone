@@ -32,7 +32,7 @@ namespace Dribbble.Controllers
                 if (accountRepo.isValid(account.AccountName, account.Password))
                 {
                     FormsAuthentication.SetAuthCookie(account.AccountName, account.RememberMe);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Shot");
                 }
                 else
                 {

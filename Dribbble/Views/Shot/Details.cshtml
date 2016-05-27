@@ -5,9 +5,34 @@
 
 @model Dribbble.Models.Shot
 
-<h2>@Model.Title</h2>
-<h3>@Model.GetAccount().Name</h3>
 
-<img src="@Model.ImageURL" alt="@Model.Title"/>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="page-header">
+            <h2>@Model.Title</h2>
+            <span>By @Model.GetAccount().Name</span>
+        </div>
 
-<p>@Model.Description</p>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="thumbnail">
+                    <img src="@Model.ImageURL" alt="@Model.Title"/>
+                </div>
+                <p></p>
+                <p>@Model.Description</p>
+            </div>
+            <div class="col-md-4">
+                <a href="#"><span class="glyphicon glyphicon-share-alt"></span> Share</a>
+                <hr/>
+                <a href="#"><span class="glyphicon glyphicon-heart"></span> 217 likes</a>
+
+                <div class="page-header">
+                    <span>Tags</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
