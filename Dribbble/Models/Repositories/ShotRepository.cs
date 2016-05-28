@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using Oracle.ManagedDataAccess;
@@ -64,7 +65,8 @@ namespace Dribbble.Models
             s.Title = dr["Title"].ToString();
             s.Description = dr["Description"].ToString();
             s.ImageURL = dr["ImageURL"].ToString();
-
+            string dateString = dr["CreatedAt"].ToString();
+            s.CreationDate = DateTime.Parse(dateString);
             return s;
         }
     }

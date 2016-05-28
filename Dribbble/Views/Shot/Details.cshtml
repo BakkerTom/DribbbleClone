@@ -10,7 +10,7 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="page-header">
             <h2>@Model.Title</h2>
-            <span>By @Model.GetAccount().Name</span>
+            <span>By @Model.GetAccount().Name on @Model.CreationDate.Date.ToLongDateString()</span>
         </div>
 
         <div class="row">
