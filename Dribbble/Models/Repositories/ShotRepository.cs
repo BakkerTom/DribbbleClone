@@ -56,6 +56,24 @@ namespace Dribbble.Models
             return s;
         }
 
+        public void Insert(Shot s)
+        {
+            if (SQL.OpenConnection())
+            {
+                OracleCommand cmd = new OracleCommand();
+                cmd.Connection = SQL.Connection;
+                cmd.CommandText =
+                    "INSERT INTO Shot(AccountID, Title, Description, ImageURL) VALUES (:account, :title, :description, :imagurl)";
+
+                cmd.Parameters.Add("account", s.AccountID);
+                cmd.Parameters.Add("title", s.Title);
+                cmd.Parameters.Add("description", s.Description);
+                cmd.Parameters.Add("imageurl", s.ImageURL);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         private Shot convertShot(OracleDataReader dr)
         {
             Shot s = new Shot();

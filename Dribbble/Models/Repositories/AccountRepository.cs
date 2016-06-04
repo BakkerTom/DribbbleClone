@@ -30,6 +30,29 @@ namespace Dribbble.Models.Repositories
             return a;
         }
 
+        public Account getByAccountName(string name)
+        {
+            Account a = new Account();
+
+            if (SQL.OpenConnection())
+            {
+                OracleCommand cmd = new OracleCommand();
+                cmd.Connection = SQL.Connection;
+                cmd.CommandText = "SELECT * FROM Account WHERE AccountName = :name";
+                cmd.Parameters.Add("name", name);
+
+                OracleDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    a = convertAccount(dr);
+                }
+            }
+
+            return a;
+        }
+
+
         /// <summary>
         /// Checks if a username/password combination exists in the datatabase
         /// </summary>

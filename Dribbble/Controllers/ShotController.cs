@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -34,6 +35,32 @@ namespace Dribbble.Controllers
         [HttpGet]
         public ActionResult New()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult New(Models.Shot shot)
+        {
+            if (Request != null)
+            {
+                if (shot.file != null)
+                {
+                    string fileName = Path.GetFileName(shot.file.FileName);
+                    if (fileName != null)
+                    {
+                        var path = Path.Combine(Server.MapPath("~/Content/uploads"), fileName);
+                        shot.file.SaveAs(path);
+
+                        shot.ImageURL = fileName;
+                        shot.AccountID = Convert.ToInt32(User.Identity.Name);
+
+                        shotRepo.Insert(shot);
+
+                        return RedirectToAction("Index");
+                    }
+                }
+                return View();
+            }
             return View();
         }
     }

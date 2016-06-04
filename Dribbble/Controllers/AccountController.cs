@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Dribbble.Models;
 using Dribbble.Models.Repositories;
+using System.Web.Script.Serialization;
 
 namespace Dribbble.Controllers
 {
@@ -15,7 +17,7 @@ namespace Dribbble.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login");
         }
 
         [HttpGet]
@@ -31,7 +33,9 @@ namespace Dribbble.Controllers
             {
                 if (accountRepo.isValid(account.AccountName, account.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(account.AccountName, account.RememberMe);
+                    Account fullAccount = accountRepo.getByAccountName(account.AccountName);
+                    FormsAuthentication.SetAuthCookie(fullAccount.ID.ToString(), account.RememberMe);
+
                     return RedirectToAction("Index", "Shot");
                 }
                 else

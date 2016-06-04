@@ -17,6 +17,7 @@ namespace Dribbble.Models
         public string ImageURL { get; set; }
         public int ReboundID { get; set; }
         public DateTime CreationDate { get; set; }
+        public HttpPostedFileBase file { get; set; }
 
         public Account GetAccount()
         {
