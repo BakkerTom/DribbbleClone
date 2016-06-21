@@ -1,0 +1,52 @@
+﻿@model Dribbble.Models.Account
+@{
+    ViewBag.Title = "Signup";
+}
+
+<div class="page-header">
+    <h2>Signup</h2>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Login Failed!")
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.AccountName)
+                @Html.TextBoxFor(m => m.AccountName, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.TextBoxFor(m => m.Password, new {@class = "form-control"})
+            </div>
+            <hr/>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bio)
+                @Html.TextAreaFor(m => m.Bio, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Location)
+                @Html.TextBoxFor(m => m.Location, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Website)
+                @Html.TextBoxFor(m => m.Website, new {@class = "form-control"})
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </div>
+}
+
+
+
+

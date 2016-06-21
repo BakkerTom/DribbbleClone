@@ -21,6 +21,24 @@ namespace Dribbble.Controllers
         }
 
         [HttpGet]
+        public ActionResult Signup()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Signup(Models.Account account)
+        {
+            //Signup flow
+            if (ModelState.IsValid)
+            {
+                accountRepo.Insert(account);
+                RedirectToAction("Login");
+            }
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
@@ -31,8 +49,10 @@ namespace Dribbble.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Wanneer de account/password combinatie klopt
                 if (accountRepo.isValid(account.AccountName, account.Password))
                 {
+                    //Haal de volledige account data op
                     Account fullAccount = accountRepo.getByAccountName(account.AccountName);
                     FormsAuthentication.SetAuthCookie(fullAccount.ID.ToString(), account.RememberMe);
 
@@ -49,7 +69,7 @@ namespace Dribbble.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Shot");
         }
     }
 }

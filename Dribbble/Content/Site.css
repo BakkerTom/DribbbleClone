@@ -16,4 +16,14 @@
     white-space: normal;
 }
 
+.caption {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.thumbnail {
+    margin-bottom: 16px;
+}
+
 

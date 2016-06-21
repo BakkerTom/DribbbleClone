@@ -176,7 +176,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Repositories\AccountRepository.cs" />
+    <Compile Include="Models\Repositories\CommentRepository.cs" />
     <Compile Include="Models\Repositories\ShotRepository.cs" />
     <Compile Include="Models\Shot.cs" />
     <Compile Include="Models\SQL.cs" />
@@ -226,6 +228,7 @@
     <Content Include="Views\Shot\Details.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shot\New.cshtml" />
+    <Content Include="Views\Account\Signup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using Dribbble.Models.Repositories;
 
@@ -9,6 +10,8 @@ namespace Dribbble.Models
     public class Shot
     {
         private AccountRepository accountRepo = new AccountRepository();
+        private CommentRepository commentRepo = new CommentRepository();
+        private ShotRepository shotRepo = new ShotRepository();
 
         public int ID { get; set; }
         public int AccountID { get; set; }
@@ -22,6 +25,16 @@ namespace Dribbble.Models
         public Account GetAccount()
         {
             return accountRepo.getByID(AccountID);
+        }
+
+        public List<Comment> Comments
+        {
+            get { return commentRepo.CommentsForShot(ID); }
+        }
+
+        public int Likes
+        {
+            get { return shotRepo.getLikes(ID); }
         }
     }
 }

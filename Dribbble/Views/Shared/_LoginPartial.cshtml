@@ -1,8 +1,20 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using Dribbble.Models
+@using Dribbble.Models.Repositories
+@using Microsoft.AspNet.Identity
+@{
+    Account user = new Account();
+    AccountRepository accountRepo = new AccountRepository();
+    //Haal de juiste user info uit de db
+    if (Request.IsAuthenticated)
+    {
+        user = accountRepo.getByID(Convert.ToInt32(@User.Identity.Name));
+    }
+}
+@* Laat het juiste menu zien gebasseerd op de status van de gebruiker *@
 @if (Request.IsAuthenticated)
 {
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name <span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@user.Name <span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li>@Html.ActionLink("Sign Out", "Logout", "Account")</li>
         </ul>
@@ -10,6 +22,7 @@
 }
 else
 {
-        <li>@Html.ActionLink("Sign Up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Sign Up", "Signup", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Sign in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }
+

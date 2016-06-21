@@ -10,13 +10,17 @@ namespace Dribbble.Models
 {
     public class ShotRepository
     {
+        /// <summary>
+        /// Haal alle shots uit de database
+        /// </summary>
+        /// <returns>List van Shot op chronologische volgorde</returns>
         public List<Shot> GetAll()
         {
             List<Shot> Shots = new List<Shot>();
 
             if (SQL.OpenConnection())
             {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM Shot", SQL.Connection);
+                OracleCommand cmd = new OracleCommand("SELECT * FROM Shot ORDER BY createdAt DESC", SQL.Connection);
                 OracleDataReader dr = cmd.ExecuteReader();
 
                 if (dr.HasRows)
@@ -34,6 +38,11 @@ namespace Dribbble.Models
             return Shots;
         }
 
+        /// <summary>
+        /// Haal een shot object met een bepaald ID op
+        /// </summary>
+        /// <param name="id">Shot ID</param>
+        /// <returns>Shot</returns>
         public Shot GetByID(int id)
         {
             Shot s = new Shot();
@@ -56,6 +65,10 @@ namespace Dribbble.Models
             return s;
         }
 
+        /// <summary>
+        /// Insert een nieuw shot in de Database
+        /// </summary>
+        /// <param name="s">Het shot object</param>
         public void Insert(Shot s)
         {
             if (SQL.OpenConnection())
@@ -74,6 +87,40 @@ namespace Dribbble.Models
             }
         }
 
+        /// <summary>
+        /// Het aantal likes voor een bepaald shot
+        /// </summary>
+        /// <param name="ShotID">ShotID</param>
+        /// <returns>Int aantal likes</returns>
+        public int getLikes(int ShotID)
+        {
+            int likes = 0;
+
+            if (SQL.OpenConnection())
+            {
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "SELECT COUNT(*) AS LIKES FROM Love WHERE ShotID = :ShotID";
+                cmd.Connection = SQL.Connection;
+                cmd.Parameters.Add("ShotID", ShotID);
+
+                using (OracleDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        likes = Convert.ToInt32(dr["Likes"]);
+                    }
+                }
+
+            }
+
+            return likes;
+        }
+
+        /// <summary>
+        /// Converteerd een OracleDataReader van de Shot tabel naar een Shot object
+        /// </summary>
+        /// <param name="dr"></param>
+        /// <returns>Shot Object</returns>
         private Shot convertShot(OracleDataReader dr)
         {
             Shot s = new Shot();

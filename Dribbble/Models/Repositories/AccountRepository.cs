@@ -81,6 +81,28 @@ namespace Dribbble.Models.Repositories
             return false;
         }
 
+        public void Insert(Account a)
+        {
+            if (SQL.OpenConnection())
+            {
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText =
+                    "INSERT INTO Account(Name, Accountname, Email, Password, Location, Website, Bio, AccountType) " +
+                    "VALUES (:Name, :Accountname, :Email, :Password, :Location, :Website, :Bio, 'PLAYER')";
+                cmd.Connection = SQL.Connection;
+
+                cmd.Parameters.Add("Name", a.Name);
+                cmd.Parameters.Add("Accountname", a.AccountName);
+                cmd.Parameters.Add("Email", a.Email);
+                cmd.Parameters.Add("Password", a.Password);
+                cmd.Parameters.Add("Location", a.Location);
+                cmd.Parameters.Add("Website", a.Website);
+                cmd.Parameters.Add("Bio", a.Bio);
+
+                cmd.ExecuteReader();
+            }
+        }
+
         private Account convertAccount(OracleDataReader dr)
         {
             Account a = new Account();
